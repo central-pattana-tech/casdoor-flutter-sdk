@@ -76,13 +76,11 @@ class _FullScreenAuthPageState extends State<FullScreenAuthPage> {
     return Stack(
       children: [
         InAppWebView(
-          initialUrlRequest: URLRequest(url: Uri.parse(widget.params.url)),
-          initialOptions: InAppWebViewGroupOptions(
-            crossPlatform: InAppWebViewOptions(
-              clearCache: widget.params.clearCache!,
-              useShouldOverrideUrlLoading: true,
-              useOnLoadResource: true,
-            ),
+          initialUrlRequest: URLRequest(url: WebUri(widget.params.url)),
+          initialSettings: InAppWebViewSettings(
+            clearCache: widget.params.clearCache!,
+            useShouldOverrideUrlLoading: true,
+            useOnLoadResource: true,
           ),
           shouldOverrideUrlLoading: (controller, navigationAction) async {
             final uri = navigationAction.request.url!;
@@ -205,24 +203,18 @@ class CasdoorFlutterSdkMobile extends CasdoorFlutterSdkPlatform {
     });
 
     await browser.openUrlRequest(
-      urlRequest: URLRequest(url: Uri.parse(params.url)),
-      options: InAppBrowserClassOptions(
-        inAppWebViewGroupOptions: InAppWebViewGroupOptions(
-          crossPlatform: InAppWebViewOptions(
-            clearCache: params.clearCache!,
-            useOnLoadResource: true,
-            useShouldOverrideUrlLoading: true,
-          ),
-        ),
-        crossPlatform: InAppBrowserOptions(
+      urlRequest: URLRequest(url: WebUri(params.url)),
+      settings: InAppBrowserClassSettings(
+        browserSettings: InAppBrowserSettings(
           hideUrlBar: true,
           toolbarTopBackgroundColor: Colors.grey.shade300,
-        ),
-        android: AndroidInAppBrowserOptions(
           toolbarTopFixedTitle: 'Login',
-        ),
-        ios: IOSInAppBrowserOptions(
           hideToolbarBottom: true,
+        ),
+        webViewSettings: InAppWebViewSettings(
+          clearCache: params.clearCache!,
+          useOnLoadResource: true,
+          useShouldOverrideUrlLoading: true,
         ),
       ),
     );
