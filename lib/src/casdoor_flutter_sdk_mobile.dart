@@ -78,6 +78,8 @@ class _FullScreenAuthPageState extends State<FullScreenAuthPage> {
         InAppWebView(
           initialUrlRequest: URLRequest(url: WebUri(widget.params.url)),
           initialSettings: InAppWebViewSettings(
+            userAgent:
+                "Mozilla/5.0 (Android 14; Mobile; rv:123.0) Gecko/123.0 Firefox/123.0",
             clearCache: widget.params.clearCache!,
             useShouldOverrideUrlLoading: true,
             useOnLoadResource: true,
@@ -212,6 +214,8 @@ class CasdoorFlutterSdkMobile extends CasdoorFlutterSdkPlatform {
           hideToolbarBottom: true,
         ),
         webViewSettings: InAppWebViewSettings(
+          userAgent:
+              "Mozilla/5.0 (Android 14; Mobile; rv:123.0) Gecko/123.0 Firefox/123.0",
           clearCache: params.clearCache!,
           useOnLoadResource: true,
           useShouldOverrideUrlLoading: true,
